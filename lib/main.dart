@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart'; // For HapticFeedback
+import 'package:flutter/services.dart';
+import 'package:healthapp/screens/Login.dart'; 
 import 'package:healthapp/screens/diet.dart';
+import 'package:healthapp/screens/doctor/RegisterDoctor.dart';
 import 'package:healthapp/screens/exercise.dart';
 import 'package:healthapp/screens/sleep.dart';
 import 'package:healthapp/screens/mental_health.dart';
@@ -11,14 +13,14 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-   MyApp({super.key});
+   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Health App',
       debugShowCheckedModeBanner: false,
-      themeMode: ThemeMode.system, // 🔄 Auto switch based on system theme
+      themeMode: ThemeMode.system,
       theme: ThemeData(
         primarySwatch: Colors.cyan,
         useMaterial3: false,
@@ -36,7 +38,8 @@ class MyApp extends StatelessWidget {
 }
 
 class HomeScreen extends StatelessWidget {
-   HomeScreen({super.key});
+   
+   const HomeScreen({super.key});
 
   List<Map<String, dynamic>> get cards => [
         {
@@ -70,9 +73,19 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:  Text('Health Categories', style: TextStyle(color: Colors.white)),
+        title:  Text('Health App', style: TextStyle(color: Colors.white)),
         centerTitle: true,
         backgroundColor: Theme.of(context).primaryColor,
+        actions: [
+          IconButton(
+            onPressed:(){
+              Navigator.push(
+                context, 
+                MaterialPageRoute(builder:( context) => Login()));
+          }, 
+          icon: Icon(Icons.login_rounded,color: Colors.white,)
+          )
+        ],
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
@@ -98,7 +111,7 @@ class HomeScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16),
                 child: Stack(
                   children: [
-                    // ✅ Fade-in image with placeholder
+                    //  Fade-in image with placeholder
                     Positioned.fill(
                       child: FadeInImage(
                         placeholder:  AssetImage('assets/images/yoga.jpg'),
